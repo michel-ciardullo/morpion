@@ -1,0 +1,29 @@
+@import '../../node_modules/bootstrap';
+
+table:not(.table) td {
+    text-align: center;
+    font-size: 4rem;
+    width: 100px;
+    height: 100px;
+}
+
+.x,
+.o {
+    cursor: not-allowed;
+}
+
+.x {
+    color: blue;
+
+    &::before {
+        content: 'X';
+    }
+}
+
+.o {
+    color: red;
+
+    &::before {
+        content: 'O';
+    }
+}
