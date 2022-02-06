@@ -10,6 +10,7 @@ import './scss/style.scss'
   const boardElement = document.querySelectorAll( '#grid td' )
   const alertElement = document.getElementById( 'alert' ) as HTMLElement
 
+  let startingPlayer: EStartingPlayer
   let playerTurn : EStartingPlayer
   let board: Board
   let player:  Player
@@ -27,21 +28,21 @@ import './scss/style.scss'
     // If the current game has terminated
     if ( board.isTerminal() )
     {
-      if ( board.isTie() )
-      {
+      if ( board.isTie() ) {
         alertElement.innerText = 'Vous avais fais match nul'
         alertElement.classList.add( 'alert-warning' )
+        return true
       }
-      else if ( board.winner() === 1 ) {
+
+      const winner = board.winner()
+
+      if ( winner === (startingPlayer === 0 ? 2 : 1) ) {
         alertElement.innerText = 'Vous avais gagner'
         alertElement.classList.add( 'alert-success' )
       }
-      else if ( board.winner() === 2 ) {
+      else {
         alertElement.innerText = 'Le bot à gagner'
         alertElement.classList.add( 'alert-danger' )
-      } else {
-        alertElement.innerText = 'Vous avais terminez la partie'
-        alertElement.classList.add( 'alert-info' )
       }
 
       return true
@@ -55,6 +56,13 @@ import './scss/style.scss'
     resetAlert()
 
     if ( playerTurn === EStartingPlayer.Bot ) return
+
+    if ( board.isTerminal() )
+    {
+      alertElement.innerText = 'Le jeu est terminé, commencez-en un autre'
+      alertElement.classList.add( 'alert-danger' )
+      return
+    }
 
     // If the index is not available
     else if ( !board.hasStateAvailable( index ) )
@@ -100,7 +108,7 @@ import './scss/style.scss'
    *
    * @return void
    */
-  function newGame( depth: number = -1, startingPlayer: number = EStartingPlayer.Human ) : void
+  function newGame( depth: number = -1 ) : void
   {
     resetAlert()
 
@@ -161,7 +169,7 @@ import './scss/style.scss'
     // 0 = Player
     // 1 = Bot
     const startingPlayerSelect: HTMLSelectElement = (<any>target)[ 'starting-player' ]
-    const startingPlayerSelectedIndex: EStartingPlayer = startingPlayerSelect.selectedIndex
+    startingPlayer = startingPlayerSelect.selectedIndex
 
     // 1:4 = depth difficulty
     // -1 = Unlimited
@@ -173,7 +181,7 @@ import './scss/style.scss'
     )
 
     // Starting new game with params specified.
-    newGame( depthDifficultyValue, startingPlayerSelectedIndex )
+    newGame( depthDifficultyValue )
   }
 
   // Add event listener to on submitted form
