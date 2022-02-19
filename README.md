@@ -1,10 +1,10 @@
 <img src="https://upload.wikimedia.org/wikipedia/commons/3/33/Tictactoe1.gif" alt="Logo of the project" align="right" style="margin-left:1rem">
 
-# Tic tac toe &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](./LICENSE)
+# Morpion &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](./LICENSE)
 
 ## Introduction
 
-Le tic-tac-toe est un jeu de réflexion se pratiquant à deux joueurs au tour par tour dont le but est de créer le premier alignement.
+Le jeu de Morpion est un jeu de réflexion se pratiquant à deux joueurs au tour par tour dont le but est de créer le premier alignement.
 
 ## Règle du jeu
 
